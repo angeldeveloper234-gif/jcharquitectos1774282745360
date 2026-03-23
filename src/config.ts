@@ -71,6 +71,11 @@ export interface Config {
             comprehensive: string;
             retainer: string;
         };
+        section_details?: {
+            Hero?: {
+                background_concept?: string;
+            };
+        };
     };
     services: ServiceItem[];
     testimonials: TestimonialItem[];
@@ -143,6 +148,11 @@ export const config: Config = {
             basic: "Consultoría",
             comprehensive: "Proyecto Ejecutivo",
             retainer: "Supervisión"
+        },
+        section_details: {
+            Hero: {
+                background_concept: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop"
+            }
         }
     },
     services: [
