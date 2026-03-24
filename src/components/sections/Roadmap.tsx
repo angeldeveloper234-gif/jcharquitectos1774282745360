@@ -9,9 +9,9 @@ export function Roadmap() {
             <div className="container mx-auto px-6">
                 <div className="grid lg:grid-cols-2 gap-16">
                     <div>
-                        <h2 className="text-4xl md:text-6xl font-display text-white mb-8 tracking-tighter">
+                        <h2 className="text-4xl md:text-8xl font-display text-white mb-8 tracking-tighter leading-none">
                             BLUEPRINT <br/>
-                            <span className="text-zinc-600">PROCESS</span>
+                            <span className="text-primary italic">PROCESS</span>
                         </h2>
                         <p className="text-zinc-400 max-w-md font-light">
                             Metodología estructurada para garantizar la integridad del diseño y la ejecución técnica.

@@ -11,7 +11,7 @@ const config: Config = {
                 background: "#111111",
                 foreground: "#F5F5F5",
                 primary: {
-                    DEFAULT: "#FFFFFF",
+                    DEFAULT: "#CBB37E",
                     foreground: "#000000",
                 },
                 secondary: {
@@ -24,8 +24,8 @@ const config: Config = {
                 border: "rgba(255,255,255,0.1)",
             },
             fontFamily: {
-                sans: ["Inter", "sans-serif"],
-                display: ["Montserrat", "sans-serif"],
+                sans: ["Outfit", "sans-serif"],
+                display: ["Syne", "sans-serif"],
                 mono: ["JetBrains Mono", "monospace"],
             },
             backgroundImage: {

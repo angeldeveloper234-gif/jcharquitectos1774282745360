@@ -4,6 +4,18 @@ export interface GalleryItem {
     image: string;
 }
 
+export interface Project {
+    id: string;
+    title: string;
+    category: string;
+    image: string;
+    year: string;
+    location: string;
+    area: string;
+    description: string;
+    gallery?: string[];
+}
+
 export interface ProductItem {
     id: string;
     name: string;
@@ -49,6 +61,7 @@ export interface Config {
     dynamicContent: {
         city: string;
         localAnchor: string;
+        manifesto: string;
         stats: {
             projectsDone: number;
             experienceYears: number;
@@ -76,6 +89,8 @@ export interface Config {
                 background_concept?: string;
             };
         };
+        awards: Array<{ year: string; title: string; award: string }>;
+        team: Array<{ name: string; role: string; bio: string; image: string }>;
     };
     services: ServiceItem[];
     testimonials: TestimonialItem[];
@@ -93,14 +108,15 @@ export interface Config {
     };
     gallery: GalleryItem[];
     products: ProductItem[];
+    projects: Project[];
 }
 
 export const config: Config = {
     branding: {
-        name: "NÉCTAR ARQUITECTOS",
-        slogan: "MINIMALISMO ESTRUCTURAL",
-        logo: "NÉCTAR",
-        trade: "Architecture & Residential Design",
+        name: "JCH+ARQUITECTOS",
+        slogan: "ESTÉTICA ANALÍTICA",
+        logo: "JCH+ARQUITECTOS",
+        trade: "Estudio de Arquitectura & Diseño",
     },
     supabase: {
         url: "",
@@ -113,8 +129,9 @@ export const config: Config = {
     paymentLink: "",
     googleMapsReviewUrl: "",
     dynamicContent: {
-        city: "{dynamic_city}",
-        localAnchor: "Estudio Central",
+        city: "Playa del Carmen, QR",
+        localAnchor: "Av. 38 x C. 25, Fracc. Tohoku",
+        manifesto: "Somos un despacho de arquitectos enfocado al diseño de proyectos que cumplen con las necesidades de nuestros clientes y se mantienen vigentes por mucho tiempo.",
         stats: {
             projectsDone: 124,
             experienceYears: 15,
@@ -153,35 +170,54 @@ export const config: Config = {
             Hero: {
                 background_concept: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop"
             }
-        }
+        },
+        awards: [
+            { year: "2023", title: "Bienal de Arquitectura", award: "Mención Honorífica" },
+            { year: "2022", title: "ArchDaily Building of the Year", award: "Finalista" },
+            { year: "2021", title: "Premio Obras CEMEX", award: "Primer Lugar - Residencial" }
+        ],
+        team: [
+            { 
+                name: "Arq. Julián Casas", 
+                role: "Founding Partner", 
+                bio: "Especialista en integración paisajística con más de 15 años de trayectoria.",
+                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop"
+            },
+            { 
+                name: "Arq. Elena Rivas", 
+                role: "Design Director", 
+                bio: "Enfocada en el minimalismo estructural y nuevas materialidades.",
+                image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400&auto=format&fit=crop"
+            }
+        ]
     },
     services: [
         {
             id: "01",
             icon: "📐",
-            title: "Diseño Residencial",
-            problem: "Falta de integración con el entorno.",
-            agitation: "Vivir en espacios desconectados reduce la calidad de vida.",
-            solve: "Arquitectura orgánica que respeta y potencia el contexto.",
-            price: "pricing.comprehensive"
+            title: "Planificación & Planos",
+            problem: "Diseños que no cumplen normativas.",
+            agitation: "Un proyecto mal planeado es una pérdida de tiempo y recursos.",
+            solve: "Elaboración de planos arquitectónicos y de instalaciones precisos.",
+            price: "Consultar"
         },
         {
             id: "02",
-            icon: "🏢",
-            title: "Desarrollo Vertical",
-            problem: "Ineficiencia en el uso del suelo.",
-            agitation: "Proyectos que no maximizan el retorno de inversión.",
-            solve: "Optimización espacial para desarrollos de alto impacto.",
-            price: "pricing.basic"
+            icon: "📜",
+            title: "Gestión & Licencias",
+            problem: "Trámites burocráticos interminables.",
+            agitation: "Retrasos legales pueden detener tu visión indefinidamente.",
+            solve: "Gestión completa de licencias y permisos necesarios para cualquier proyecto.",
+            price: "Consultar"
         },
         {
             id: "03",
-            icon: "🏳️",
-            title: "Interiorismo",
-            problem: "Espacios fríos y sin carácter.",
-            agitation: "El interior debe ser una extensión del alma del habitante.",
-            solve: "Curaduría de materiales y luz para atmósferas únicas.",
-            price: "pricing.retainer"
+            icon: "🏗️",
+            title: "Construcción",
+            problem: "Del papel a la realidad con errores.",
+            agitation: "La brecha entre el diseño y la obra puede arruinar la estética.",
+            solve: "Conversión fiel del proyecto plasmado en papel a la realidad física.",
+            price: "Presupuesto"
         }
     ],
     testimonials: [
@@ -199,9 +235,9 @@ export const config: Config = {
         }
     ],
     demoUser: {
-        name: "Arquitecto Principal",
-        email: "proyectos@nectar.arq",
-        whatsapp: "+525512345678"
+        name: "JCH+ARQUITECTOS",
+        email: "contacto@jcharq.mx",
+        whatsapp: "+529841135167"
     },
     features: {
         showGallery: true,
@@ -232,5 +268,47 @@ export const config: Config = {
             image: "https://images.unsplash.com/photo-1600596542815-6ad4c7213299?q=80&w=800&auto=format&fit=crop"
         }
     ],
-    products: []
+    products: [],
+    projects: [
+        {
+            id: "casa-brutalista",
+            title: "Casa Brutalista",
+            category: "Residencial",
+            image: "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=1200&auto=format&fit=crop",
+            year: "2023",
+            location: "Valle de Bravo",
+            area: "450m²",
+            description: "Una exploración del concreto aparente y la luz cenital.",
+            gallery: [
+                "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=800&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800&auto=format&fit=crop"
+            ]
+        },
+        {
+            id: "loft-urbano",
+            title: "Loft Urbano",
+            category: "Interiorismo",
+            image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1200&auto=format&fit=crop",
+            year: "2022",
+            location: "CDMX",
+            area: "120m²",
+            description: "Reactivación de espacios industriales para la vida moderna.",
+            gallery: [
+                "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800&auto=format&fit=crop"
+            ]
+        },
+        {
+            id: "pabellon-cristal",
+            title: "Pabellón de Cristal",
+            category: "Comercial",
+            image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1200&auto=format&fit=crop",
+            year: "2023",
+            location: "Monterrey",
+            area: "800m²",
+            description: "Transparencia extrema y fluidez espacial.",
+            gallery: [
+                "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop"
+            ]
+        }
+    ]
 };

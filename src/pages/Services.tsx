@@ -1,86 +1,90 @@
 import { motion } from "framer-motion";
 import { config } from "@/config";
-import { Features, FAQ, CTA } from "@/components/sections";
 import { SEO } from "@/components/ui/SEO";
 
 export function Services() {
     const { branding, services } = config;
 
     return (
-        <main className="pt-24 min-h-screen bg-[#0F1115]">
+        <main className="pt-32 min-h-screen bg-[#111111] selection:bg-white selection:text-black">
             <SEO 
-                title="Servicios Especializados" 
-                description={`Descubre las soluciones de construcción y arquitectura de ${branding.name}.`}
-                keywords={`${branding.name}, arquitectura, edificación, remodelaciones, servicios`}
+                title="Servicios" 
+                description={`Áreas de expertise de ${branding.name}.`}
             />
 
             {/* Hero Section */}
-            <section className="py-20 px-6">
-                <div className="container mx-auto max-w-4xl text-center">
-                    <motion.span
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+            <section className="py-24 px-6 border-b border-white/5 pb-32">
+                <div className="container mx-auto">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="text-primary text-xs tracking-[0.3em] uppercase block mb-6 font-display"
+                        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
                     >
-                        Nuestras Capacidades
-                    </motion.span>
-                    <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-7xl font-display font-medium text-white mb-8 tracking-tighter"
-                    >
-                        Soluciones DE <span className="text-primary italic">INGENIERÍA</span>
-                    </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
-                        className="text-xl text-zinc-400 font-sans leading-relaxed text-balance"
-                    >
-                        Ofrecemos un espectro integral de servicios de edificación, desde el diseño conceptual hasta la ejecución técnica final.
-                    </motion.p>
+                        <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest block mb-12">EXPERTISE / CAPACIDADES</span>
+                        <h1 className="text-5xl md:text-[10vw] font-display text-white mb-16 tracking-tighter leading-[0.8] uppercase max-w-6xl">
+                            SOLUCIONES <br />
+                            <span className="text-white/20 italic">SIN</span> LÍMITES
+                        </h1>
+                    </motion.div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
+                        <p className="text-2xl md:text-3xl font-light text-zinc-400 leading-relaxed max-w-xl text-balance">
+                            Ofrecemos un espectro integral de diseño arquitectónico, desde el plan maestro conceptual hasta el detalle más fino de ejecución.
+                        </p>
+                    </div>
                 </div>
             </section>
 
-            {/* List Section */}
-            <section className="py-20 px-6 border-t border-white/5">
-                <div className="container mx-auto max-w-6xl">
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Asymmetric List Section */}
+            <section className="py-32 px-6">
+                <div className="container mx-auto">
+                    <div className="space-y-40">
                         {services.map((service, index) => (
                             <motion.div
                                 key={service.id}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className="p-10 border border-white/5 bg-zinc-900 group relative overflow-hidden flex flex-col justify-between h-[350px]"
+                                    initial={{ opacity: 0, y: 50 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.8 }}
+                                    className={`flex flex-col md:flex-row gap-20 items-start ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
                             >
-                                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 -mr-16 -mt-16 blur-2xl group-hover:bg-primary/30 transition-all rounded-full" />
-                                <div>
-                                    <div className="text-4xl mb-8 group-hover:scale-110 transition-transform origin-left">{service.icon}</div>
-                                    <h2 className="text-2xl font-display font-medium text-white mb-4 tracking-tight uppercase">
+                                <div className="w-full md:w-1/2 aspect-video bg-zinc-900 overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000">
+                                    <img 
+                                        src={`https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop&sig=${index}`} 
+                                        alt={service.title}
+                                        className="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity"
+                                    />
+                                </div>
+                                <div className="w-full md:w-1/2 pt-12">
+                                    <span className="text-xs font-mono text-zinc-600 mb-6 block">0{index + 1} / CAPACIDAD</span>
+                                    <h2 className="text-4xl md:text-6xl font-display text-white uppercase mb-8 tracking-tighter">
                                         {service.title}
                                     </h2>
-                                    <p className="text-zinc-500 text-[10px] font-sans mb-6 tracking-widest uppercase leading-loose italic border-l-2 border-primary pl-4">
-                                        {service.problem}
+                                    <p className="text-xl text-zinc-500 font-light leading-relaxed mb-12 max-w-md">
+                                        {service.solve}. {service.agitation}
                                     </p>
+                                    <div className="h-[1px] w-full bg-white/5" />
                                 </div>
-                                <p className="text-zinc-400 text-sm font-sans leading-relaxed">
-                                    {service.solve}
-                                </p>
                             </motion.div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            <Features />
-            <FAQ />
-            <CTA />
+            {/* Bottom Section */}
+            <section className="py-32 bg-white text-black">
+                <div className="container mx-auto px-6 text-center">
+                    <h2 className="text-4xl md:text-7xl font-display uppercase tracking-tighter mb-12">
+                        ¿LISTO PARA <br /> <span className="italic">EMPEZAR</span>?
+                    </h2>
+                    <a 
+                        href="/contact"
+                        className="inline-block border-b-2 border-black pb-2 text-2xl font-display uppercase tracking-widest hover:translate-x-4 transition-transform duration-500"
+                    >
+                        HABLEMOS DE TU PROYECTO
+                    </a>
+                </div>
+            </section>
         </main>
     );
 }

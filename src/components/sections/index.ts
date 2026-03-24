@@ -11,3 +11,6 @@ export { Gallery } from "./Gallery";
 export { Products } from "./Products";
 export { Footer } from "./Footer";
 export { BentoGrid } from "./BentoGrid";
+export { Manifesto } from "./Manifesto";
+export { FeaturedWorks } from "./FeaturedWorks";
+export { PressLogos } from "./PressLogos";

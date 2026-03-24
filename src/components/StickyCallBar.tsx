@@ -20,10 +20,10 @@ export function StickyCallBar() {
                 href={`https://wa.me/${config.demoUser.whatsapp.replace('+', '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 py-4 bg-white text-black active:bg-zinc-200 transition-colors"
+                className="flex items-center justify-center gap-3 py-4 bg-primary text-black active:bg-white transition-colors"
             >
                 <MessageSquare size={16} />
-                <span className="text-[10px] font-mono uppercase tracking-widest font-bold">WhatsApp</span>
+                <span className="text-[10px] font-mono uppercase tracking-widest font-black">WhatsApp</span>
             </a>
         </motion.div>
     );

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Menu, X, Compass } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -12,10 +12,10 @@ export function Navbar() {
 
     const links = [
         { href: "/", label: "INICIO" },
-        { href: "/about", label: "NOSOTROS" },
+        { href: "/projects", label: "PROYECTOS" },
+        { href: "/about", label: "ESTUDIO" },
         { href: "/services", label: "SERVICIOS" },
         { href: "/contact", label: "CONTACTO" },
-        { href: "/admin", label: "ADMIN" },
     ];
 
     const isActive = (path: string) => location.pathname === path;
@@ -23,10 +23,7 @@ export function Navbar() {
     return (
         <nav className="fixed top-0 left-0 right-0 z-40 bg-[#0F1115]/90 backdrop-blur-sm border-b border-white/5">
             <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-                <Link to="/" className="flex items-center gap-3">
-                    <div className="w-9 h-9 bg-primary flex items-center justify-center">
-                        <Compass size={18} className="text-black" />
-                    </div>
+                <Link to="/" className="flex items-center">
                     <span className="text-xl font-display font-bold tracking-widest text-white uppercase">
                         {branding.logo}
                     </span>
@@ -47,8 +44,8 @@ export function Navbar() {
                     ))}
                     <Link to="/contact">
                         <Button
-                            variant="outline"
-                            className="border-primary text-primary hover:bg-primary hover:text-black rounded-none px-8 tracking-widest text-xs font-bold"
+                            variant="default"
+                            className="bg-[#CBB37E] hover:bg-[#DCC58F] text-[#0A0A0A] rounded-none px-12 h-14 tracking-[0.2em] text-[10px] font-black border-none transition-all duration-700 shadow-[0_10px_30px_-10px_rgba(203,179,126,0.2)]"
                         >
                             PRESUPUESTO GRATIS
                         </Button>

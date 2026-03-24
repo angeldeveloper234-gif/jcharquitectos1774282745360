@@ -1,4 +1,4 @@
-import { Hero, Gallery, Roadmap, Stats, Features, Testimonials, CTA, Contact, BentoGrid } from "@/components/sections";
+import { Hero, FeaturedWorks, Manifesto, PressLogos, Roadmap, Testimonials, CTA, Contact } from "@/components/sections";
 import { CustomCursor } from "@/components/features/CustomCursor";
 import { StickyCallBar } from "@/components/StickyCallBar";
 import { SEO } from "@/components/ui/SEO";
@@ -11,7 +11,7 @@ interface HomeProps {
 }
 
 export function Home({ dynamic_city, metric_counter, pain_point_headline }: HomeProps) {
-    const { branding, features } = config;
+    const { branding } = config;
 
     return (
         <main className="relative selection:bg-white selection:text-black bg-[#111111]">
@@ -24,18 +24,16 @@ export function Home({ dynamic_city, metric_counter, pain_point_headline }: Home
                 dynamic_city={dynamic_city} 
                 pain_point_headline={pain_point_headline}
             />
+
+            <Manifesto />
             
-            {features.showStats && <Stats />}
+            <FeaturedWorks />
             
-            <BentoGrid />
-            
-            <Features />
-            
-            {features.showGallery && <Gallery />}
-            
+            <PressLogos />
+
             <Roadmap />
             
-            {features.showTestimonials && <Testimonials />}
+            <Testimonials />
             
             <CTA />
             

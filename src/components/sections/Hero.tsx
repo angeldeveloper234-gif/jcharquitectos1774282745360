@@ -1,6 +1,4 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { config } from "@/config";
 
 interface HeroProps {
@@ -9,64 +7,67 @@ interface HeroProps {
 }
 
 export function Hero({ dynamic_city, pain_point_headline }: HeroProps) {
-    const { dynamicContent } = config;
+    const { dynamicContent, branding } = config;
     const city = dynamic_city || dynamicContent.city;
-    const headline = pain_point_headline || dynamicContent.specialization.pain;
 
     return (
-        <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#111111]">
-            {/* Background Image */}
+        <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-[#111111] selection:bg-white selection:text-black">
+            {/* Background Image - Inmersive & Full Screen */}
             <div className="absolute inset-0 z-0">
-                <img
-                    src={config.dynamicContent.section_details?.Hero?.background_concept || "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop"}
-                    alt="Architecture Blueprint"
-                    className="w-full h-full object-cover opacity-20 grayscale"
+                <motion.img
+                    initial={{ scale: 1.1 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 10, ease: "linear" }}
+                    src={config.dynamicContent.section_details?.Hero?.background_concept || "https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=2000&auto=format&fit=crop"}
+                    alt="High-end Architecture"
+                    className="w-full h-full object-cover grayscale brightness-50"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/80 to-transparent" />
-                <div className="absolute inset-0 blueprint-grid opacity-30" />
+                <div className="absolute inset-0 bg-gradient-to-b from-[#111111]/40 via-transparent to-[#111111]" />
             </div>
 
-            <div className="container mx-auto px-6 relative z-10">
+            <div className="container mx-auto px-6 relative z-10 flex flex-col items-center justify-center">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1 }}
-                    className="max-w-4xl"
+                    transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-full text-center"
                 >
-                    <div className="flex items-center gap-4 mb-8">
-                        <div className="h-[1px] w-12 bg-white"></div>
-                        <span className="text-xs font-mono text-white uppercase tracking-[0.3em]">
-                            {config.branding.trade}
-                        </span>
-                    </div>
-
-                    <h1 className="text-5xl md:text-8xl font-display text-white mb-8 leading-[0.9] tracking-tighter uppercase">
-                        {headline}
+                    <h1 className="text-5xl sm:text-7xl md:text-[11vw] font-display font-black text-white mb-8 leading-[0.75] tracking-tighter uppercase break-words hover:text-primary transition-all duration-1000 cursor-default">
+                        {branding.name}
                     </h1>
-
-                    <p className="text-xl text-zinc-400 font-light max-w-xl mb-12 border-l border-white/20 pl-6 py-2">
-                        Gestión integral y diseño arquitectónico en <span className="text-white">{city}</span>.
-                    </p>
-
-                    <div className="flex flex-col sm:flex-row gap-6">
-                        <Button
-                            size="lg"
-                            className="bg-white text-black hover:bg-zinc-200 rounded-none px-10 h-16 text-xs tracking-[0.2em] uppercase font-bold"
-                            onClick={() => window.location.href = `https://wa.me/${config.demoUser.whatsapp.replace('+', '')}`}
-                        >
-                            CONTACTAR POR WHATSAPP
-                        </Button>
+                    
+                    <div className="flex flex-col items-center">
+                        <motion.div 
+                            initial={{ width: 0 }}
+                            animate={{ width: "128px" }}
+                            transition={{ delay: 1, duration: 2 }}
+                            className="h-[4px] bg-primary mb-12"
+                        ></motion.div>
+                        <p className="text-xs md:text-sm font-mono text-white/90 uppercase tracking-[0.8em] font-black">
+                            {branding.trade} — {city}
+                        </p>
                     </div>
                 </motion.div>
             </div>
 
+            {/* Scroll Indicator */}
+            <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 2 }}
+                className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
+            >
+                <span className="text-[10px] font-mono text-white/30 uppercase tracking-[0.3em]">SCROLL</span>
+                <div className="w-[1px] h-12 bg-gradient-to-b from-white/40 to-transparent" />
+            </motion.div>
+
             {/* Technical Decor */}
-            <div className="absolute bottom-10 right-10 hidden md:block text-right">
+            <div className="absolute top-32 right-10 hidden md:block text-right">
                 <p className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest">
-                    COORD: 19.4326° N, 99.1332° W
+                    ESTUDIO: {branding.name}
                 </p>
                 <p className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest">
-                    STATUS: ACTIVE PROJECT
+                    LOC: {city.toUpperCase()}
                 </p>
             </div>
         </section>

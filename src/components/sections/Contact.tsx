@@ -3,14 +3,14 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Clock, HardHat, Check } from "lucide-react";
+import { MapPin, Phone, Clock, Layers, Check } from "lucide-react";
 import { config } from "@/config";
 
 const schema = z.object({
     name: z.string().min(2, "Requerido"),
     phone: z.string().min(10, "Mínimo 10 dígitos"),
     service: z.string().min(1, "Selecciona un servicio"),
-    message: z.string().min(5, "Describe brevemente el trabajo"),
+    message: z.string().min(5, "Describe tu proyecto"),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -24,64 +24,70 @@ export function Contact() {
     });
 
     const onSubmit = async (data: FormData) => {
-        console.log("Lead capturado:", data);
-        await new Promise(resolve => setTimeout(resolve, 1200));
-        alert("¡Mensaje enviado! Te contactaremos hoy mismo para coordinar la visita.");
+        const text = `Hola, mi nombre es ${data.name}. Me interesa el servicio de ${data.service}. Mensaje: ${data.message}`;
+        const url = `https://wa.me/${demoUser.whatsapp.replace('+', '')}?text=${encodeURIComponent(text)}`;
+        window.open(url, '_blank');
         reset();
     };
 
     return (
-        <section id="contact" className="relative py-32 bg-[#0D0C0C] border-t border-white/5">
+        <section id="contact" className="relative py-32 bg-[#0A0A0A] border-t border-white/5">
             <div className="container mx-auto px-6 relative z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
 
                     {/* Left: Info */}
                     <div>
-                        <p className="text-[#F59E0B] font-sans text-xs tracking-[0.4em] uppercase font-black mb-4">
-                            Contacto Directo
+                        <p className="text-primary font-mono text-xs tracking-[0.5em] uppercase font-black mb-8">
+                            CONTACTO DIRECTO
                         </p>
-                        <h2 className="text-5xl md:text-6xl font-display text-white mb-10 tracking-widest leading-tight">
-                            COTIZACIÓN <span className="text-[#F59E0B]">SIN COSTO</span>
+                        <h2 className="text-5xl md:text-8xl font-display text-white mb-12 tracking-tighter leading-[0.85] uppercase">
+                            COTIZACIÓN <br />
+                            <span className="text-primary italic">SIN COSTO</span>
                         </h2>
 
-                        <div className="space-y-8 mb-12">
-                            <div className="flex items-start gap-4">
-                                <MapPin className="w-5 h-5 text-[#F59E0B] mt-1 flex-shrink-0" />
+                        <div className="space-y-12 mb-16">
+                            <div className="flex items-start gap-6">
+                                <div className="p-4 bg-primary/5 border border-primary/20">
+                                    <MapPin className="w-5 h-5 text-primary" />
+                                </div>
                                 <div>
-                                    <h4 className="text-white font-sans uppercase tracking-widest text-xs mb-1 font-black">Ubicación</h4>
-                                    <p className="text-zinc-400 text-sm">{localAnchor}, {city}</p>
-                                    <p className="text-zinc-600 text-xs mt-1">También atendemos a domicilio</p>
+                                    <h4 className="text-white font-mono uppercase tracking-widest text-[10px] mb-2 font-black">Sede Principal</h4>
+                                    <p className="text-zinc-400 text-sm leading-relaxed max-w-xs">{localAnchor}, {city}</p>
                                 </div>
                             </div>
-                            <div className="flex items-start gap-4">
-                                <Phone className="w-5 h-5 text-[#F59E0B] mt-1 flex-shrink-0" />
+                            <div className="flex items-start gap-6">
+                                <div className="p-4 bg-primary/5 border border-primary/20">
+                                    <Phone className="w-5 h-5 text-primary" />
+                                </div>
                                 <div>
-                                    <h4 className="text-white font-sans uppercase tracking-widest text-xs mb-1 font-black">Teléfono / WhatsApp</h4>
-                                    <p className="text-zinc-400 text-sm">{demoUser.whatsapp}</p>
+                                    <h4 className="text-white font-mono uppercase tracking-widest text-[10px] mb-2 font-black">WhatsApp</h4>
+                                    <p className="text-zinc-400 text-lg font-display tracking-widest leading-none">{demoUser.whatsapp}</p>
                                 </div>
                             </div>
-                            <div className="flex items-start gap-4">
-                                <Clock className="w-5 h-5 text-[#F59E0B] mt-1 flex-shrink-0" />
+                            <div className="flex items-start gap-6">
+                                <div className="p-4 bg-primary/5 border border-primary/20">
+                                    <Clock className="w-5 h-5 text-primary" />
+                                </div>
                                 <div>
-                                    <h4 className="text-white font-sans uppercase tracking-widest text-xs mb-1 font-black">Horario de Atención</h4>
+                                    <h4 className="text-white font-mono uppercase tracking-widest text-[10px] mb-2 font-black">Horario</h4>
                                     <p className="text-zinc-400 text-sm">Lunes a Sábado: 8:00 – 19:00</p>
-                                    <p className="text-zinc-600 text-xs mt-1">Urgencias con cita previa</p>
                                 </div>
                             </div>
                         </div>
 
                         {/* Differentiators */}
-                        <div className="border border-[#F59E0B]/20 p-6 bg-[#F59E0B]/5">
-                            <p className="text-[#F59E0B] text-xs font-black uppercase tracking-widest mb-4">Por qué elegir nuestra constructora</p>
-                            <ul className="space-y-3">
+                        <div className="border border-[#CBB37E]/30 p-8 bg-[#CBB37E]/[0.03] relative group overflow-hidden">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-[#CBB37E]/5 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition-transform duration-1000"></div>
+                            <p className="text-[#CBB37E] text-[10px] font-black uppercase tracking-[0.3em] mb-8 relative z-10">POR QUÉ JCH+ARQUITECTOS</p>
+                            <ul className="space-y-5 relative z-10">
                                 {[
-                                    "Presupuesto gratis y sin compromiso",
-                                    "Garantía escrita en todos los trabajos",
-                                    "Materiales de calidad comprobada",
-                                    `Más de ${dynamicContent.stats.projectsDone} proyectos completados`,
+                                    "Diseño vigente y funcional",
+                                    "Gestión integral de licencias",
+                                    "Supervisión técnica de obra",
+                                    "Exclusividad en cada detalle",
                                 ].map((item, i) => (
-                                    <li key={i} className="flex items-center gap-3 text-sm text-zinc-400 font-sans">
-                                        <Check size={12} className="text-[#F59E0B] flex-shrink-0" />
+                                    <li key={i} className="flex items-center gap-5 text-xs text-zinc-400 font-mono uppercase tracking-widest group/item">
+                                        <div className="w-1.5 h-1.5 bg-[#CBB37E] group-hover/item:scale-150 transition-transform"></div>
                                         {item}
                                     </li>
                                 ))}
@@ -91,65 +97,66 @@ export function Contact() {
 
                     {/* Right: Form */}
                     <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        className="bg-white/5 p-8 md:p-12 border border-white/5"
                     >
-                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                            <div className="space-y-1">
+                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+                            <div className="space-y-2">
+                                <label className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Nombre Completo</label>
                                 <input
                                     {...register("name")}
-                                    className="w-full bg-transparent border-b-2 border-zinc-800 py-4 text-white focus:outline-none focus:border-[#F59E0B] transition-colors placeholder:text-zinc-700 text-sm tracking-widest font-sans"
-                                    placeholder="NOMBRE COMPLETO"
+                                    className="w-full bg-white/5 border border-white/10 p-5 text-white focus:outline-none focus:border-primary transition-all placeholder:text-zinc-700 text-sm"
+                                    placeholder="EJ. JULIÁN CASAS"
                                 />
-                                {errors.name && <span className="text-xs text-red-500">{errors.name.message}</span>}
+                                {errors.name && <span className="text-[10px] text-red-500 uppercase font-mono">{errors.name.message}</span>}
                             </div>
 
-                            <div className="space-y-1">
+                            <div className="space-y-2">
+                                <label className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">WhatsApp / Teléfono</label>
                                 <input
                                     {...register("phone")}
-                                    className="w-full bg-transparent border-b-2 border-zinc-800 py-4 text-white focus:outline-none focus:border-[#F59E0B] transition-colors placeholder:text-zinc-700 text-sm tracking-widest font-sans"
-                                    placeholder="TELÉFONO / WHATSAPP"
+                                    className="w-full bg-white/5 border border-white/10 p-5 text-white focus:outline-none focus:border-primary transition-all placeholder:text-zinc-700 text-sm"
+                                    placeholder="984 XXX XX XX"
                                 />
-                                {errors.phone && <span className="text-xs text-red-500">{errors.phone.message}</span>}
+                                {errors.phone && <span className="text-[10px] text-red-500 uppercase font-mono">{errors.phone.message}</span>}
                             </div>
 
-                            <div className="space-y-1">
+                            <div className="space-y-2">
+                                <label className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Interés Principal</label>
                                 <select
                                     {...register("service")}
-                                    className="w-full bg-transparent border-b-2 border-zinc-800 py-4 text-zinc-400 focus:outline-none focus:border-[#F59E0B] transition-colors text-sm tracking-widest font-sans appearance-none cursor-pointer"
+                                    className="w-full bg-zinc-900 border border-white/10 p-5 text-white focus:outline-none focus:border-primary transition-all text-sm appearance-none cursor-pointer"
                                 >
-                                    <option value="" className="bg-zinc-950">TIPO DE SERVICIO</option>
+                                    <option value="">SELECCIONA UNA OPCIÓN</option>
                                     {services.map((s) => (
-                                        <option key={s.id} value={s.title} className="bg-zinc-950">{s.title}</option>
+                                        <option key={s.id} value={s.title}>{s.title}</option>
                                     ))}
-                                    <option value="Otro" className="bg-zinc-950">Otro</option>
+                                    <option value="Otro">Otro</option>
                                 </select>
-                                {errors.service && <span className="text-xs text-red-500">{errors.service.message}</span>}
+                                {errors.service && <span className="text-[10px] text-red-500 uppercase font-mono">{errors.service.message}</span>}
                             </div>
 
-                            <div className="space-y-1">
+                            <div className="space-y-2">
+                                <label className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Mensaje</label>
                                 <textarea
                                     {...register("message")}
                                     rows={4}
-                                    className="w-full bg-transparent border-b-2 border-zinc-800 py-4 text-white focus:outline-none focus:border-[#F59E0B] transition-colors resize-none placeholder:text-zinc-700 text-sm tracking-widest font-sans"
-                                    placeholder="DESCRIBE EL TRABAJO O PROBLEMA"
+                                    className="w-full bg-white/5 border border-white/10 p-5 text-white focus:outline-none focus:border-primary transition-all resize-none placeholder:text-zinc-700 text-sm"
+                                    placeholder="DESCRIBE TU PROYECTO..."
                                 />
-                                {errors.message && <span className="text-xs text-red-500">{errors.message.message}</span>}
+                                {errors.message && <span className="text-[10px] text-red-500 uppercase font-mono">{errors.message.message}</span>}
                             </div>
 
                             <Button
                                 type="submit"
-                                className="w-full bg-[#F59E0B] text-white hover:brightness-110 rounded-none py-5 uppercase tracking-[0.2em] text-xs font-black transition-all duration-300 shadow-[0_10px_30px_-10px_rgba(224,123,42,0.4)]"
+                                className="w-full bg-primary text-black hover:bg-white rounded-none py-8 uppercase tracking-[0.4em] text-xs font-black transition-all duration-700 shadow-[0_20px_40px_-10px_rgba(203,179,126,0.2)]"
                                 disabled={isSubmitting}
                             >
-                                {isSubmitting ? "ENVIANDO..." : "SOLICITAR PRESUPUESTO GRATIS"}
+                                {isSubmitting ? "PROCESANDO..." : "INICIAR PROYECTO"}
                             </Button>
-
-                            <p className="text-center text-zinc-600 text-[10px] uppercase tracking-widest">
-                                Sin spam. Sin compromiso. Respondemos hoy.
-                            </p>
                         </form>
                     </motion.div>
                 </div>
